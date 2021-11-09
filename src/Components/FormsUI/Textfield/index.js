@@ -7,6 +7,7 @@ const TextfieldWrapper = ({
   ...otherProps
 }) => {
   const [field, mata] = useField(name);
+  console.log("🚀 ~ file: index.js ~ line 10 ~ mata", mata)
 
   const configTextfield = {
     ...field,

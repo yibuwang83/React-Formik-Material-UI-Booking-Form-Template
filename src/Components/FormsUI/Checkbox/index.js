@@ -16,6 +16,7 @@ const CheckboxWrapper = ({
 }) => {
   const { setFieldValue } = useFormikContext();
   const [field, meta] = useField(name);
+  console.log("🚀 ~ file: index.js ~ line 19 ~ meta", meta)
 
   const handleChange = evt => {
     const { checked } = evt.target;
@@ -40,6 +41,7 @@ const CheckboxWrapper = ({
           control={<Checkbox {...configCheckbox} />}
           label={label}
         />
+        {meta.error}
       </FormGroup>
     </FormControl>
   );
