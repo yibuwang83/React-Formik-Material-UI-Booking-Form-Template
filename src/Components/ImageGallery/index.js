@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import Gallery from 'react-photo-gallery';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
+import { useTheme } from '@material-ui/core/styles';
 import { Grid, List, ListItem, ListItemText } from '@material-ui/core';
 import Photo from './Photo';
 import arrayMove from 'array-move';
@@ -24,11 +25,15 @@ const SortableGallery = SortableContainer(({ items }) => {
   );
 });
 
-const useStyles = makeStyles((theme) => ({
-  button: {
-    margin: theme.spacing(1),
-  },
-}));
+const useStyles = makeStyles(() => {
+  const theme = useTheme();
+
+  return {
+    button: {
+      margin: theme.spacing(1),
+    },
+  };
+});
 
 export default function ImageGallery() {
   const [items, setItems] = useState(photos);

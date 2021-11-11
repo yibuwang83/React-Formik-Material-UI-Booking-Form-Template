@@ -2,7 +2,8 @@ import React from 'react';
 import Header from './Components/Header';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
+import { useTheme } from '@material-ui/core/styles';
 import { Container, Grid, Typography } from '@material-ui/core';
 import Textfield from './Components/FormsUI/Textfield';
 import Select from './Components/FormsUI/Select';
@@ -11,14 +12,17 @@ import Checkbox from './Components/FormsUI/Checkbox';
 import Button from './Components/FormsUI/Button';
 import countries from './data/countries.json';
 import ImageGallery from './Components/ImageGallery';
-import ImageList from './Components/ImageList';
+// import ImageList from './Components/ImageList';
 
-const useStyles = makeStyles((theme) => ({
-  formWrapper: {
-    marginTop: theme.spacing(5),
-    marginBottom: theme.spacing(8),
-  },
-}));
+const useStyles = makeStyles(() => {
+  const theme = useTheme();
+  return {
+    formWrapper: {
+      marginTop: theme.spacing(5),
+      marginBottom: theme.spacing(8),
+    },
+  };
+});
 
 const INITIAL_FORM_STATE = {
   firstName: '',
