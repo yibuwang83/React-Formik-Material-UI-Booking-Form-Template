@@ -20,6 +20,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
+import { sortableContainer, sortableElement } from 'react-sortable-hoc';
+import arrayMove from 'array-move';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,14 +77,51 @@ export default function ImageList() {
   const [currentImage, setCurrentImage] = useState(0);
   const [viewerIsOpen, setViewerIsOpen] = useState(false);
 
-  //   <SortableContainer onSortEnd={this.onSortEnd} useDragHandle>
-  //         {items.map((value, index) => (
-  //           <SortableItem key={`item-${value}`} index={index} value={value} />
-  //         ))}
-  //       </SortableContainer>
+  const [imgItems, setImgItems] = useState(imagesList);
+  console.log('🚀 ~ file: index.js ~ line 87 ~ ImageList ~ imgItems', imgItems);
+
+  const onSortEnd = ({ oldIndex, newIndex }) => {
+    setImgItems(arrayMove(imgItems, oldIndex, newIndex));
+  };
+
+  const SortableItem = sortableElement(({ value, index }) => {
+    return (
+      <GridListTile key={value.id}>
+        <img src={value.src} alt={value.title} />
+        <GridListTileBar
+          title={value.title}
+          subtitle={<span>by: {value.author}</span>}
+          actionIcon={
+            <IconButton
+              aria-label={`info about ${value.title}`}
+              className={classes.icon}
+              value={value.id}
+              onClick={() => handleClickOpen(value, index)}
+            >
+              <InfoIcon />
+            </IconButton>
+          }
+        />
+      </GridListTile>
+    );
+  });
+
+  const SortableContainer = sortableContainer(({ children }) => {
+    return <GridList cols={3}>{children}</GridList>;
+  });
 
   return (
     <div>
+      <SortableContainer onSortEnd={onSortEnd}>
+        {imgItems.map((value, index) => (
+          <SortableItem key={`item-${index}`} index={index} value={value} />
+        ))}
+      </SortableContainer>
+      <br />
+      <br />
+      <br />
+      <br />
+
       <GridList cols={3}>
         {imagesList.map((tile, index) => (
           <GridListTile key={tile.id}>

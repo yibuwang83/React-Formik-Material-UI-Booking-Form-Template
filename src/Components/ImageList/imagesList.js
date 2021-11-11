@@ -5,6 +5,8 @@ const imagesList = [
     title: 'foo',
     description: 'bar',
     author: 'Rajini',
+    width: 1,
+    height: 1,
   },
   {
     id: 2,
@@ -12,6 +14,8 @@ const imagesList = [
     title: 'foo',
     description: 'bar',
     author: 'Kamal',
+    width: 1,
+    height: 1,
   },
   {
     id: 3,
@@ -19,27 +23,8 @@ const imagesList = [
     title: 'foo',
     description: 'bar',
     author: 'Vijay',
-  },
-  {
-    id: 4,
-    src: 'https://source.unsplash.com/iecJiKe_RNg/600x799',
-    title: 'foo',
-    description: 'bar',
-    author: 'Ajith',
-  },
-  {
-    id: 5,
-    src: 'https://source.unsplash.com/epcsn8Ed8kY/600x799',
-    title: 'Sunset',
-    description: 'bar',
-    author: 'Sharukh',
-  },
-  {
-    id: 6,
-    src: 'https://source.unsplash.com/NQSWvyVRIJk/800x599',
-    title: 'Sunset_Road',
-    description: 'bar',
-    author: 'Sudhanshu',
+    width: 1,
+    height: 1,
   },
 ];
 
