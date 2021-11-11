@@ -12,7 +12,7 @@ import Checkbox from './Components/FormsUI/Checkbox';
 import Button from './Components/FormsUI/Button';
 import countries from './data/countries.json';
 import ImageGallery from './Components/ImageGallery';
-// import ImageList from './Components/ImageList';
+import PictureList from './Components/PictureList';
 
 const useStyles = makeStyles(() => {
   const theme = useTheme();
@@ -166,10 +166,10 @@ const App = () => {
                   <Grid item xs={12}>
                     <ImageGallery />
                   </Grid>
-                  {/* <br />
+                  <br />
                   <Grid item xs={12}>
-                    <ImageList />
-                  </Grid> */}
+                    <PictureList />
+                  </Grid>
                   <Grid item xs={12}>
                     <Button>Submit Form</Button>
                   </Grid>

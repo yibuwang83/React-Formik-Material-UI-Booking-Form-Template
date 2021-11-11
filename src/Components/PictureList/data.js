@@ -1,4 +1,4 @@
-const imagesList = [
+const data = [
   {
     id: 1,
     src: 'https://source.unsplash.com/2ShvY8Lf6l0/800x599',
@@ -28,4 +28,4 @@ const imagesList = [
   },
 ];
 
-export default imagesList;
+export default data;
