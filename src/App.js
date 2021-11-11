@@ -11,7 +11,7 @@ import Checkbox from './Components/FormsUI/Checkbox';
 import Button from './Components/FormsUI/Button';
 import countries from './data/countries.json';
 import ImageGallery from './Components/ImageGallery';
-import ImageList from './Components/ImageList'
+import ImageList from './Components/ImageList';
 
 const useStyles = makeStyles((theme) => ({
   formWrapper: {
@@ -162,10 +162,10 @@ const App = () => {
                   <Grid item xs={12}>
                     <ImageGallery />
                   </Grid>
-                  <br />
+                  {/* <br />
                   <Grid item xs={12}>
-                     <ImageList />
-                  </Grid>
+                    <ImageList />
+                  </Grid> */}
                   <Grid item xs={12}>
                     <Button>Submit Form</Button>
                   </Grid>

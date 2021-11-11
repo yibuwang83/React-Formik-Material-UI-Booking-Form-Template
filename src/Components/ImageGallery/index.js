@@ -1,13 +1,20 @@
 import React, { useState, useCallback } from 'react';
 import Gallery from 'react-photo-gallery';
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid, List, ListItem, ListItemText } from '@material-ui/core';
 import Photo from './Photo';
 import arrayMove from 'array-move';
-import { Card } from '@material-ui/core';
+import { Button, IconButton, Card, FormControlLabel } from '@material-ui/core';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import Carousel, { Modal, ModalGateway } from 'react-images';
 import { photos } from '../../data/photos';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import DeleteIcon from '@material-ui/icons/Delete';
 
-const SortablePhoto = SortableElement((item) => <Photo {...item} />);
+const SortablePhoto = SortableElement((item) => {
+  return <Photo {...item} />;
+});
+
 const SortableGallery = SortableContainer(({ items }) => {
   return (
     <Gallery
@@ -17,16 +24,21 @@ const SortableGallery = SortableContainer(({ items }) => {
   );
 });
 
+const useStyles = makeStyles((theme) => ({
+  button: {
+    margin: theme.spacing(1),
+  },
+}));
+
 export default function ImageGallery() {
   const [items, setItems] = useState(photos);
-
+  const classes = useStyles();
   const onSortEnd = ({ oldIndex, newIndex }) => {
     setItems(arrayMove(items, oldIndex, newIndex));
   };
   const [currentImage, setCurrentImage] = useState(0);
   const [viewerIsOpen, setViewerIsOpen] = useState(false);
 
-  console.log('🚀 ~ file: index.js ~ line 21 ~ ImageGallery ~ items', items);
   const closeLightbox = () => {
     setCurrentImage(0);
     setViewerIsOpen(false);
@@ -38,23 +50,43 @@ export default function ImageGallery() {
     setViewerIsOpen(true);
   };
 
+  const deleteImage = () => {};
+
   return (
     <Card>
-      <SortableGallery items={items} onSortEnd={onSortEnd} axis={'xy'} />
-      <ul style={{ display: 'flex' }}>
-        {items.map((item, index) => {
-          return (
-            <li key={index}>
-              <button
-                style={{ width: 100, height: 35 }}
-                onClick={() => handleClickOpen(item, index)}
-              >
-                {item.name}
-              </button>
-            </li>
-          );
-        })}
-      </ul>
+      <Grid container spacing={2}>
+        <Grid item xs={7}>
+          <SortableGallery items={items} onSortEnd={onSortEnd} axis={'xy'} />
+        </Grid>
+        <Grid item xs={5}>
+          <List dense>
+            {items.map((item, index) => {
+              return (
+                <ListItem key={index}>
+                  <ListItemText id={index} primary={`${item.name}`} />
+                  <IconButton
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    onClick={() => handleClickOpen(item, index)}
+                  >
+                    <VisibilityIcon />
+                  </IconButton>
+                  <IconButton
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    onClick={() => deleteImage(item, index)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </ListItem>
+              );
+            })}
+          </List>
+        </Grid>
+      </Grid>
+
       <ModalGateway>
         {viewerIsOpen ? (
           <Modal onClose={closeLightbox}>
